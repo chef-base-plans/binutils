@@ -1,6 +1,6 @@
 pkg_name=binutils
 pkg_origin=core
-pkg_version=2.32
+pkg_version=2.34
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
