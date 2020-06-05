@@ -2,6 +2,7 @@ title 'Tests to confirm binutils works as expected'
 
 plan_name = input('plan_name', value: 'binutils')
 plan_ident = "#{ENV['HAB_ORIGIN']}/#{plan_name}"
+hab_path = input('hab_path', value: '/tmp/hab')
 
 control 'core-plans-binutils' do
   impact 1.0
@@ -18,7 +19,7 @@ control 'core-plans-binutils' do
   We also need to ensure that the -dynamic-linker is set to the glibc ld-linux-x86_64.so.2 that this
   package was set with. To do that, we pull out the fully qualified ident for glibc from the DEPS.
   '
-  binutils_pkg_ident = command("hab pkg path #{plan_ident}")
+  binutils_pkg_ident = command("#{hab_path} pkg path #{plan_ident}")
   describe binutils_pkg_ident do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
@@ -39,7 +40,7 @@ control 'core-plans-binutils' do
     its('stderr') { should be_empty }
   end
 
-  describe command("DEBUG=true; hab pkg exec #{binutils_pkg_ident} ld.bfd") do
+  describe command("DEBUG=true; hab pkg exec #{plan_ident} ld.bfd") do
     its('exit_status') { should eq 0 }
     its('stdout') { should_not be_empty }
     its('stdout') { should match /-dynamic-linker\s+#{glibc_dependency}/ }
