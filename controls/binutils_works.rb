@@ -33,17 +33,17 @@ control 'core-plans-binutils' do
   end
   glibc_dependency = glibc_dependency.stdout.strip
 
-  describe command("DEBUG=true; LD_RUN_PATH=\"/foo/bar:/baz/lib\"; #{binutils_pkg_ident}/bin/ld.bfd") do
-    its('exit_status') { should eq 0 }
-    its('stdout') { should_not be_empty }
-    its('stdout') { should match /-rpath\s+\/foo\/bar\s+-rpath\s+\/baz\/lib/ }
-    its('stderr') { should be_empty }
+  describe command("export DEBUG=true; export LD_RUN_PATH=\"/foo/bar:/baz/lib\"; #{binutils_pkg_ident}/bin/ld.bfd") do
+    its('exit_status') { should eq 1 }
+    its('stdout') { should be_empty }
+    its('stderr') { should match /-rpath\s+\/foo\/bar\s+-rpath\s+\/baz\/lib/ }
+    its('stderr') { should_not be_empty }
   end
 
-  describe command("DEBUG=true; hab pkg exec #{plan_ident} ld.bfd") do
-    its('exit_status') { should eq 0 }
-    its('stdout') { should_not be_empty }
-    its('stdout') { should match /-dynamic-linker\s+#{glibc_dependency}/ }
-    its('stderr') { should be_empty }
+  describe command("export DEBUG=true; #{binutils_pkg_ident}/bin/ld.bfd") do
+    its('exit_status') { should eq 1 }
+    its('stdout') { should be_empty }
+    its('stderr') { should match /-dynamic-linker\s*\W*\/hab\/pkgs\/#{glibc_dependency}/ }
+    its('stderr') { should_not be_empty }
   end
 end
