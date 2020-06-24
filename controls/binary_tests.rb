@@ -20,7 +20,7 @@ control 'core-plans-binutils-binaries' do
   end
   bin_directory = "#{pkg_path.stdout.strip}/bin/"
   
-  binary_checks = %w(ld size elfedit readelf nm ranlib ar c++filt gprof as ld.gold ld.bfd.real ld.bfd addr2line strip objdump objcopy strings dwp)
+  binary_checks = %w(ld size elfedit readelf nm ranlib ar c++filt gprof as ld.bfd.real ld.bfd addr2line strip objdump objcopy strings dwp)
   
   binary_checks.each do |binary|
     describe file("#{File.join(bin_directory, binary)}") do
@@ -37,5 +37,11 @@ control 'core-plans-binutils-binaries' do
       its('stdout') { should match /\(GNU Binutils\) #{version}/ }
       its('exit_status') { should eq 0 }
     end
+  end
+
+  # ld.gold has a different version return format 
+  describe command("#{File.join(bin_directory, "ld.gold")} --version") do
+    its('stdout') { should match /\(GNU Binutils #{version}\)/ }
+    its('exit_status') { should eq 0 }
   end
 end
