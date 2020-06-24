@@ -34,7 +34,7 @@ control 'core-plans-binutils-binaries' do
 
   binary_checks.each do |binary|
     describe command("#{File.join(bin_directory, binary)} --version") do
-      its('stdout') { should match /GNU #{binary} \(GNU Binutils\) #{version}/ }
+      its('stdout') { should match /GNU #{binary.split('.')[0]} \(GNU Binutils\) #{version}/ }
       its('exit_status') { should eq 0 }
     end
   end
