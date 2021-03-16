@@ -1,6 +1,6 @@
 pkg_name=binutils
 pkg_origin=core
-pkg_version=2.32
+pkg_version=2.36.1
 pkg_maintainer="The Habitat Maintainers <humans@habitat.sh>"
 pkg_description="\
 The GNU Binary Utilities, or binutils, are a set of programming tools for \
@@ -10,7 +10,7 @@ and assembly source code.\
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="de38b15c902eb2725eac6af21183a5f34ea4634cb0bcef19612b50e5ed31072d"
+pkg_shasum="5b4bd2e79e30ce8db0abd76dd2c2eae14a94ce212cfc59d3c37d23e24bc6d7a3"
 pkg_deps=(
   core/glibc
   core/zlib
