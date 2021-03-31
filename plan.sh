@@ -14,6 +14,7 @@ pkg_shasum="5b4bd2e79e30ce8db0abd76dd2c2eae14a94ce212cfc59d3c37d23e24bc6d7a3"
 pkg_deps=(
   core/glibc
   core/zlib
+  core/gcc
 )
 pkg_build_deps=(
   core/coreutils
