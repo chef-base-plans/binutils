@@ -10,7 +10,7 @@ and assembly source code.\
 pkg_upstream_url="https://www.gnu.org/software/binutils/"
 pkg_license=('GPL-2.0-or-later')
 pkg_source="http://ftp.gnu.org/gnu/$pkg_name/${pkg_name}-${pkg_version}.tar.bz2"
-pkg_shasum="5b4bd2e79e30ce8db0abd76dd2c2eae14a94ce212cfc59d3c37d23e24bc6d7a3"
+pkg_shasum=67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4
 pkg_deps=(
   core/glibc
   core/zlib
