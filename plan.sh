@@ -16,14 +16,11 @@ pkg_deps=(
   core/zlib
 )
 pkg_build_deps=(
-  core/coreutils
-  core/diffutils
-  core/patch
-  core/make
-  core/gcc
-  core/texinfo
-  core/expect
-  core/dejagnu
+	core/coreutils
+	core/make
+	core/gcc
+	core/texinfo
+	core/expect
 )
 pkg_bin_dirs=(bin)
 pkg_include_dirs=(include)
@@ -134,6 +131,12 @@ do_install() {
   popd > /dev/null
 }
 
+# overriding default strip functionality for not striping unneeded symbols
+# from one of target (strip binary)
+do_strip() {
+  return 0
+}
+
 _verify_tty() {
   # verify that PTYs are working properly
   local actual
@@ -159,7 +162,6 @@ _wrap_binary() {
     > "$bin"
   chmod 755 "$bin"
 }
-
 
 # ----------------------------------------------------------------------------
 # **NOTICE:** What follows are implementation details required for building a
