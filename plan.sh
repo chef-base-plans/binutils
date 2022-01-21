@@ -14,7 +14,7 @@ pkg_shasum=67fc1a4030d08ee877a4867d3dcab35828148f87e1fd05da6db585ed5a166bd4
 pkg_deps=(
   core/glibc
   core/zlib
-	core/gcc-libs
+  core/gcc-libs
 )
 
 pkg_build_deps=(
@@ -76,6 +76,9 @@ do_prepare() {
 }
 
 do_build() {
+#Applying patch for linking error with newer binutils.
+#can be removed in the next version of 2.38
+patch -p0 < "$PLAN_CONTEXT/malformarchive-linking-fix.patch"
   rm -rf ../${pkg_name}-build
   mkdir ../${pkg_name}-build
   pushd ../${pkg_name}-build > /dev/null
